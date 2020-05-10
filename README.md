@@ -9,10 +9,11 @@ This is just a mini programming exercise for myself to practice PyTorch.
 ## Concept
 
 The underlying idea is simple: the dropout rate should increase with overfitting.
-The simplest means of doing so is to set dropout = (1 - val_acc / train_acc).
+The simplest means of doing so is to set dropout = (1 - train_loss / val_loss).
+Accuracy could also be used.
 
 A maximum and minimum level should also be set to handle the following cases:
-* Validation accuracy is higher than training accuracy.
-* Validation accuracy is so low that dropout approaches one, severely damaging network performance.
+* Validation loss is lower than training loss.
+* Validation loss is so high that dropout approaches one, severely damaging network performance.
 
 Therefore wrapping the basic dropout calculation in a `min()` and `max()` is advised.
